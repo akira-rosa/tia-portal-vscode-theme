@@ -1,0 +1,42 @@
+FUNCTION_BLOCK "Motor_Control"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT
+      Start : Bool;   // Start push button
+      Stop : Bool;    // Stop push button (NC)
+      Fault : Bool;
+   END_VAR
+
+   VAR_OUTPUT
+      Running : Bool;
+      Status : Word;
+   END_VAR
+
+   VAR
+      StartDelay {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      Speed : Real := 0.0;
+      Counter : DInt;
+   END_VAR
+
+BEGIN
+   REGION Start / Stop logic
+      (* Latch the motor while Stop is healthy *)
+      #StartDelay(IN := #Start AND NOT #Fault,
+                  PT := T#2S);
+
+      IF #StartDelay.Q AND #Stop THEN
+         #Running := TRUE;
+      ELSIF NOT #Stop OR #Fault THEN
+         #Running := FALSE;
+      END_IF;
+   END_REGION
+
+   REGION Speed ramp
+      FOR #Counter := 1 TO 10 BY 1 DO
+         #Speed := #Speed + 1.5;
+      END_FOR;
+      "Global_DB".MotorSpeed := REAL_TO_INT(#Speed);
+      #Status := 16#00FF;
+      "HMI_Message" := 'Motor running$N';
+   END_REGION
+END_FUNCTION_BLOCK

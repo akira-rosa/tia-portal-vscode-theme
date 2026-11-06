@@ -1,0 +1,26 @@
+{
+  "comments": {
+    "lineComment": "//",
+    "blockComment": ["(*", "*)"]
+  },
+  "brackets": [["(", ")"], ["[", "]"]],
+  "autoClosingPairs": [
+    { "open": "(", "close": ")" },
+    { "open": "[", "close": "]" },
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+    { "open": "\"", "close": "\"", "notIn": ["string", "comment"] },
+    { "open": "(*", "close": " *)", "notIn": ["string"] }
+  ],
+  "surroundingPairs": [["(", ")"], ["[", "]"], ["'", "'"], ["\"", "\""]],
+  "folding": {
+    "markers": {
+      "start": "^\\s*(?i:REGION|IF|CASE|FOR|WHILE|REPEAT|VAR(_\\w+)?|STRUCT|FUNCTION(_BLOCK)?|ORGANIZATION_BLOCK|DATA_BLOCK|TYPE)\\b",
+      "end": "^\\s*(?i:END_\\w+)\\b"
+    }
+  },
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*(?i:REGION\\b.*|IF\\b.*\\bTHEN|ELSIF\\b.*\\bTHEN|ELSE|CASE\\b.*\\bOF|FOR\\b.*\\bDO|WHILE\\b.*\\bDO|REPEAT|VAR(_\\w+)?|STRUCT|BEGIN)\\s*(//.*)?$",
+    "decreaseIndentPattern": "^\\s*(?i:END_\\w+|ELSIF|ELSE|UNTIL|BEGIN)\\b"
+  },
+  "wordPattern": "#?\"[^\"]*\"|#?[A-Za-z_][A-Za-z0-9_]*|-?\\d+(\\.\\d+)?"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "tia-portal-vscode-theme",
+  "displayName": "TIA Portal Theme",
+  "description": "Color themes inspired by Siemens TIA Portal (Project View light + Portal View dark), with SCL syntax highlighting.",
+  "version": "1.0.0",
+  "publisher": "akira-rosa",
+  "author": "akira-rosa",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akira-rosa/tia-portal-vscode-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akira-rosa/tia-portal-vscode-theme/issues"
+  },
+  "homepage": "https://github.com/akira-rosa/tia-portal-vscode-theme#readme",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "theme",
+    "tia portal",
+    "siemens",
+    "scl",
+    "plc",
+    "structured text",
+    "s7"
+  ],
+  "galleryBanner": {
+    "color": "#009999",
+    "theme": "dark"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "TIA Portal – Project View",
+        "uiTheme": "vs",
+        "path": "./themes/tia-portal-project-view-color-theme.json"
+      },
+      {
+        "label": "TIA Portal – Portal View",
+        "uiTheme": "vs-dark",
+        "path": "./themes/tia-portal-portal-view-color-theme.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "scl",
+        "aliases": ["SCL (Siemens)", "scl"],
+        "extensions": [".scl", ".udt"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "scl",
+        "scopeName": "source.scl",
+        "path": "./syntaxes/scl.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "npx --yes @vscode/vsce package"
+  }
+}

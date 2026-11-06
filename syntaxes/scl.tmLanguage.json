@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SCL (Siemens TIA Portal)",
+  "scopeName": "source.scl",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#attributes" },
+    { "include": "#strings" },
+    { "include": "#globalTags" },
+    { "include": "#localTags" },
+    { "include": "#literals" },
+    { "include": "#regions" },
+    { "include": "#blockKeywords" },
+    { "include": "#declarationKeywords" },
+    { "include": "#controlKeywords" },
+    { "include": "#wordOperators" },
+    { "include": "#dataTypes" },
+    { "include": "#constants" },
+    { "include": "#functionCalls" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.scl",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.scl",
+          "begin": "\\(\\*",
+          "end": "\\*\\)",
+          "captures": { "0": { "name": "punctuation.definition.comment.scl" } }
+        },
+        {
+          "name": "comment.block.scl",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "captures": { "0": { "name": "punctuation.definition.comment.scl" } }
+        }
+      ]
+    },
+    "attributes": {
+      "comment": "Attribute lists / pragmas such as { S7_Optimized_Access := 'TRUE' }",
+      "name": "meta.attribute.scl",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [ { "include": "#strings" } ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.scl",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            { "name": "constant.character.escape.scl", "match": "\\$([$'LlNnPpRrTt]|[0-9A-Fa-f]{2})" }
+          ]
+        }
+      ]
+    },
+    "globalTags": {
+      "comment": "In SCL double quotes mark global tag / block names, not strings",
+      "name": "variable.other.global.scl",
+      "match": "\"[^\"\\n]*\""
+    },
+    "localTags": {
+      "comment": "#Name or #\"Quoted name\" - block-local operands",
+      "name": "variable.other.local.scl",
+      "match": "#(?:\"[^\"\\n]*\"|[A-Za-z_][A-Za-z0-9_]*)"
+    },
+    "literals": {
+      "patterns": [
+        {
+          "comment": "Time / date literals: T#5s, LT#1ms, S5T#2s, D#2024-01-01, TOD#12:00:00, DTL#...",
+          "name": "constant.other.literal.scl",
+          "match": "(?i)\\b(?:LTIME|TIME|LT|T|S5TIME|S5T|DATE|D|TIME_OF_DAY|TOD|LTOD|DATE_AND_TIME|DT|LDT|DTL)#[0-9A-Za-z_:.\\-]+"
+        },
+        {
+          "comment": "Typed / based numbers: 16#FF, 2#1010, INT#5, REAL#1.5, BOOL#1",
+          "name": "constant.numeric.scl",
+          "match": "(?i)\\b(?:(?:[A-Z]+)#)?(?:16#[0-9A-F_]+|8#[0-7_]+|2#[01_]+|[0-9][0-9_]*(?:\\.[0-9_]+)?(?:E[+-]?[0-9]+)?)\\b"
+        }
+      ]
+    },
+    "regions": {
+      "name": "keyword.control.region.scl",
+      "match": "(?i)\\b(?:END_REGION|REGION)\\b"
+    },
+    "blockKeywords": {
+      "name": "keyword.other.block.scl",
+      "match": "(?i)\\b(?:END_FUNCTION_BLOCK|FUNCTION_BLOCK|END_FUNCTION|FUNCTION|END_ORGANIZATION_BLOCK|ORGANIZATION_BLOCK|END_DATA_BLOCK|DATA_BLOCK|END_TYPE|TYPE|BEGIN|VERSION|TITLE|AUTHOR|FAMILY|NAME|KNOW_HOW_PROTECT|NON_RETAIN|RETAIN)\\b"
+    },
+    "declarationKeywords": {
+      "name": "keyword.other.declaration.scl",
+      "match": "(?i)\\b(?:VAR_INPUT|VAR_OUTPUT|VAR_IN_OUT|VAR_TEMP|VAR_STAT|VAR_GLOBAL|VAR|END_VAR|CONSTANT|END_STRUCT|STRUCT|ARRAY|OF|REF_TO|AT)\\b"
+    },
+    "controlKeywords": {
+      "name": "keyword.control.scl",
+      "match": "(?i)\\b(?:END_IF|IF|THEN|ELSIF|ELSE|END_CASE|CASE|END_FOR|FOR|TO|BY|DO|END_WHILE|WHILE|END_REPEAT|REPEAT|UNTIL|EXIT|CONTINUE|RETURN|GOTO)\\b"
+    },
+    "wordOperators": {
+      "name": "keyword.operator.logical.scl",
+      "match": "(?i)\\b(?:AND|OR|XOR|NOT|MOD)\\b"
+    },
+    "dataTypes": {
+      "name": "support.type.primitive.scl",
+      "match": "(?i)\\b(?:BOOL|BYTE|WORD|DWORD|LWORD|SINT|USINT|INT|UINT|DINT|UDINT|LINT|ULINT|REAL|LREAL|TIME|LTIME|S5TIME|DATE|TIME_OF_DAY|TOD|LTIME_OF_DAY|LTOD|DATE_AND_TIME|DT|LDT|DTL|CHAR|WCHAR|STRING|WSTRING|VARIANT|VOID|POINTER|ANY|BLOCK_FB|BLOCK_FC|DB_ANY|HW_ANY|IEC_TIMER|IEC_COUNTER|TON_TIME|TOF_TIME|TP_TIME)\\b"
+    },
+    "constants": {
+      "name": "constant.language.scl",
+      "match": "(?i)\\b(?:TRUE|FALSE|NULL)\\b"
+    },
+    "functionCalls": {
+      "comment": "Instruction / block calls: MOVE_BLK(...), TON(...), \"MyFC\"(...) handled by globalTags",
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+      "captures": { "1": { "name": "entity.name.function.scl" } }
+    },
+    "operators": {
+      "patterns": [
+        { "name": "keyword.operator.assignment.scl", "match": ":=|\\?=|=>" },
+        { "name": "keyword.operator.comparison.scl", "match": "<>|<=|>=|<|>|=" },
+        { "name": "keyword.operator.arithmetic.scl", "match": "\\*\\*|[+\\-*/]" },
+        { "name": "punctuation.terminator.scl", "match": ";" },
+        { "name": "punctuation.separator.scl", "match": "[,:.]" }
+      ]
+    }
+  }
+}
