@@ -7,6 +7,7 @@
 - CSS layer renamed to `css/tia-portal.css`; generator is now `scripts/gen_theme.py`.
 - Previous themes moved to `archive/` and no longer ship in the extension.
 - Release workflow now runs when a GitHub release is published.
+- Archived v1.0 themes renamed: the light one is now **Portal View** and the dark one **Project View**.
 
 ## 1.1.0
 
