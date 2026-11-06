@@ -1,47 +1,59 @@
 # TIA Portal Theme for VS Code
 
-VS Code themes inspired by the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code the way the TIA SCL editor does. Two flavors:
+A VS Code theme that mimics the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code exactly the way the TIA SCL editor does.
 
-- **Classic** — a close replica of the TIA Portal V16–V19 look: glossy black title strips, navy editor title bars, raised gradient tabs, the gear watermark, TIA dialog frames. Uses an optional CSS layer for the gradients and bevels.
-- **Modern** — a cleaner, flat interpretation with Siemens petrol accents. Pure color theme, no extra setup.
+![TIA Portal theme with two SCL blocks open](images/preview-editors.png)
 
-## Classic themes
-
-| TIA Portal Classic – Project View | TIA Portal Classic – Portal View |
+| No editor open — the gear work area | TIA-style dialogs and pickers |
 |---|---|
-| ![Classic Project View](images/preview-classic-project.png) | ![Classic Portal View](images/preview-classic-portal.png) |
-| ![Classic Project View, empty workspace](images/preview-classic-project-empty.png) | ![Classic Portal View, empty workspace](images/preview-classic-portal-empty.png) |
+| ![Empty work area with gears](images/preview-empty.png) | ![Dialog in the TIA frame](images/preview-dialog.png) |
 
-Colors were pixel-sampled from TIA Portal V16/V19 screenshots:
+## The look
 
-- **Project View** — glossy black title strip, gray `#B2B2B2` header bars with white text, `#F0F0F0` project tree with dotted selection box, navy `#2D354D` active editor title bar (gray when inactive), `#1B2030` window separators, raised `#F3F3F3 → #D9D9D9` tabs and section headers, inspector-style panel tabs, navy empty workspace with gears, black "Portal view" bottom bar.
-- **Portal View** — the start screen palette: `#1B2030` navigation column with orange `#FF8000` active marker, slate `#3C4561` panels with periwinkle `#B7C5FF` text and a gear watermark, `#CCCCCC` content areas, orange status item.
-- **SCL coloring exactly like TIA** — keywords and types blue `#0000FF`, whole `REGION …` lines magenta, comments green, operands, numbers and literals plain black.
-- **TIA dialog frames** — modal dialogs, the command palette and notifications get the black title strip, gray body, darker footer and white outer frame of TIA's dialogs.
-- Classic Windows-style always-visible scrollbars, gradient push buttons, debugging turns the status bar online-orange.
+It follows TIA Portal's **Project View**, with the **Portal View's** navigation column mixed in. Colors were pixel-sampled from TIA Portal V16/V19:
 
-### Turning on the gradients and borders (CSS layer)
+- **Glossy black title strip** across the top, like the TIA window frame.
+- **Navigation column** on the far left in Portal View navy (`#1B2030`), with slate buttons and the orange (`#FF8000`) active marker.
+- **Project tree** with a gray `#B2B2B2` header bar, `#F0F0F0` body, white row lines and the dotted selection box.
+- **Raised gradient section headers** (`#F3F3F3 → #D9D9D9`, `#6C6C6C` bottom edge) like "Devices" and "Details view".
+- **Editor title bars**: navy `#2D354D` for the editor you're working in, gray `#B2B2B2` for the others, separated by `#1B2030` window borders.
+- **Gear work area**: when no editor is open, the work area turns navy `#3A435E` with gears. As in TIA, that's all it shows. Open a block and the gears are gone.
+- **Inspector-style panel tabs** (Properties / Info / Diagnostics look) and a **Tasks-style** secondary side bar.
+- **Black bottom bar** like TIA's "Portal view" strip. It turns online-orange while you debug.
+- **TIA dialog frames**: dialogs, the command palette and notifications get the black title strip, gray body, darker footer and white outer frame.
+- **Classic always-visible scrollbars**, gradient push buttons and yellow tooltips.
+- **SCL colors exactly like TIA**: keywords and data types blue `#0000FF`, whole `REGION …` lines magenta, comments green, and operands, numbers and literals plain black.
 
-VS Code color themes can only set flat colors. The gradients, bevels, glossy strips and the watermark live in [`css/tia-portal-classic.css`](css/tia-portal-classic.css), which you load with a custom-CSS extension. Without it the Classic themes still work, just flat.
+## Install
+
+1. Download the latest `tia-portal-vscode-theme-x.y.z.vsix` from the [Releases page](https://github.com/akira-rosa/tia-portal-vscode-theme/releases).
+2. In VS Code open the Extensions view, click the `…` menu → **Install from VSIX…**, and pick the file.
+   Or from a terminal: `code --install-extension tia-portal-vscode-theme-2.0.0.vsix`
+3. Press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and choose **TIA Portal**.
+
+That gives you all the colors. For the gradients, glossy strips, bevels, dialog frames and gears, add the CSS layer below.
+
+## Turning on the gradients and borders (CSS layer)
+
+VS Code color themes can only set flat colors. Everything three-dimensional lives in [`css/tia-portal.css`](css/tia-portal.css), which you load with a custom-CSS extension.
 
 1. Install **[Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css)** (`be5invis.vscode-custom-css`).
-2. Copy `tia-portal-classic.css` somewhere stable (for example `C:\Users\<you>\vscode-css\`). You can download it from this repo, or find it inside the installed extension at `~/.vscode/extensions/akira-rosa.tia-portal-vscode-theme-<version>/css/` — copying it out means extension updates won't break the path.
+2. Copy `tia-portal.css` somewhere stable, for example `C:\Users\<you>\vscode-css\`. Download it from this repo, or copy it out of the installed extension at `~/.vscode/extensions/akira-rosa.tia-portal-vscode-theme-<version>/css/`, so extension updates don't break the path.
 3. Add to your `settings.json` (note the `file:///` prefix and forward slashes):
 
    ```json
-   "vscode_custom_css.imports": ["file:///C:/Users/<you>/vscode-css/tia-portal-classic.css"],
+   "vscode_custom_css.imports": ["file:///C:/Users/<you>/vscode-css/tia-portal.css"],
    "window.titleBarStyle": "custom"
    ```
 
-4. Run **Enable Custom CSS and JS** from the Command Palette (`Ctrl+Shift+P`), then restart VS Code (fully close it, don't just reload).
-5. Pick **TIA Portal Classic – Project View** or **TIA Portal Classic – Portal View** with `Ctrl+K Ctrl+T`.
+4. Run **Enable Custom CSS and JS** from the Command Palette (`Ctrl+Shift+P`), then fully close and reopen VS Code.
 
 Things to know:
 
-- VS Code will say your installation "appears to be corrupt" — that's expected when CSS is injected; choose **Don't Show Again**.
+- VS Code will say your installation "appears to be corrupt". That's expected when CSS is injected; choose **Don't Show Again**.
 - After every VS Code update, run **Reload Custom CSS and JS** again.
 - On Windows with a system-wide install you may need to run VS Code as administrator once for step 4.
-- Every rule is scoped to the Classic themes, so switching to any other theme turns the CSS off automatically.
+- Every rule is scoped to the TIA Portal theme, so switching to another theme turns the CSS off.
 - To remove it, run **Disable Custom CSS and JS** and restart.
 
 For the full TIA feel, these settings help:
@@ -53,22 +65,6 @@ For the full TIA feel, these settings help:
 "workbench.tree.indent": 14
 ```
 
-## Modern themes
-
-| TIA Portal – Project View (light) | TIA Portal – Portal View (dark) |
-|---|---|
-| ![Project View](images/preview-light.png) | ![Portal View](images/preview-dark.png) |
-
-**TIA Portal – Project View** — the light engineering workspace: gray window chrome, white project tree and editor, Siemens petrol (`#009999`) accents and selection, gray section headers like the "Project tree" and task-card bars.
-
-**TIA Portal – Portal View** — a dark petrol variant for long sessions or dark rooms.
-
-Both modern themes share the same TIA touches:
-
-- **Online-mode orange** — the status bar turns orange (`#FF9900`) while you debug, just like TIA Portal's title bars when you go online with a PLC.
-- **Classic yellow tooltips** in the light theme, like TIA's hover help.
-- **SCL editor colors** — keywords and data types in blue, comments in green, `#local` tags in petrol, `"global"` tags in plain text, strings in red, literals such as `T#2S` and `16#FF` in orange, pragmas in gray.
-
 ## SCL language support
 
 The extension registers an `SCL (Siemens)` language for `.scl` and `.udt` files, so exported TIA sources (External source files) highlight correctly. It understands:
@@ -77,55 +73,32 @@ The extension registers an `SCL (Siemens)` language for `.scl` and `.udt` files,
 - `"GlobalTag"` / `"Block_DB".Member` — double quotes are tag names in SCL, not strings
 - `'strings'` with `$N`, `$'`, `$$` escapes
 - typed and time literals: `T#2S`, `LT#5ms`, `TOD#12:00:00`, `16#00FF`, `2#1010`, `INT#5`
-- `REGION … END_REGION`, block keywords, `VAR_*` sections, `{ S7_Optimized_Access := 'TRUE' }` attribute lists
+- `REGION <name> … END_REGION`, block keywords, `VAR_*` sections, `{ S7_Optimized_Access := 'TRUE' }` attribute lists
 - `(* block *)`, `/* block */` and `// line` comments, folding and auto-indent
 
-Data block sources use the `.db` extension, which VS Code won't claim automatically (it clashes with database files). To highlight them, add to your settings:
+Data block sources use the `.db` extension, which VS Code won't claim automatically because it clashes with database files. To highlight them, add to your settings:
 
 ```json
 "files.associations": { "*.db": "scl" }
 ```
 
-The themes work for every other language too; the SCL grammar just makes PLC code look like it does in TIA.
-
-## Install
-
-**From a release (easiest)**
-
-1. Download the latest `tia-portal-vscode-theme-x.y.z.vsix` from the [Releases page](https://github.com/akira-rosa/tia-portal-vscode-theme/releases).
-2. In VS Code open the Extensions view, click the `…` menu → **Install from VSIX…**, and pick the file.
-   Or from a terminal: `code --install-extension tia-portal-vscode-theme-1.0.0.vsix`
-3. Press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and pick one of the four themes. For the Classic ones, also set up the [CSS layer](#turning-on-the-gradients-and-borders-css-layer).
-
-**From source**
-
-```bash
-git clone https://github.com/akira-rosa/tia-portal-vscode-theme.git
-cd tia-portal-vscode-theme
-npx @vscode/vsce package          # produces tia-portal-vscode-theme-<version>.vsix
-code --install-extension tia-portal-vscode-theme-*.vsix
-```
-
-Or open the folder in VS Code and press `F5` to try it in an Extension Development Host window.
-
 ## Customizing
 
-Modern theme colors come from the palettes in [`scripts/gen_themes.py`](scripts/gen_themes.py); the Classic themes and their CSS come from [`scripts/gen_classic.py`](scripts/gen_classic.py). Change a value and regenerate:
+The theme and its CSS are generated from one palette at the top of [`scripts/gen_theme.py`](scripts/gen_theme.py). Change a value and regenerate:
 
 ```bash
-python3 scripts/gen_themes.py      # rewrites the Modern themes
-python3 scripts/gen_classic.py     # rewrites the Classic themes + css/tia-portal-classic.css
+python3 scripts/gen_theme.py      # rewrites themes/tia-portal-color-theme.json and css/tia-portal.css
 ```
 
-For a quick personal tweak without rebuilding, override colors in your VS Code `settings.json`:
+For a quick personal tweak without rebuilding, override colors in your `settings.json`:
 
 ```json
 "workbench.colorCustomizations": {
-  "[TIA Portal – Project View]": { "statusBar.background": "#CCEBEB" }
+  "[TIA Portal]": { "editorGroup.emptyBackground": "#2D354D" }
 },
 "editor.tokenColorCustomizations": {
-  "[TIA Portal – Project View]": {
-    "textMateRules": [{ "scope": "variable.other.local.scl", "settings": { "foreground": "#000000" } }]
+  "[TIA Portal]": {
+    "textMateRules": [{ "scope": "variable.other.local.scl", "settings": { "foreground": "#00646E" } }]
   }
 }
 ```
@@ -139,25 +112,28 @@ For a quick personal tweak without rebuilding, override colors in your VS Code `
 | Control keywords (`IF`, `FOR`, …) | `keyword.control.scl` |
 | Block / declaration keywords | `keyword.other.block.scl`, `keyword.other.declaration.scl` |
 | `REGION` / `END_REGION` | `keyword.control.region.scl` |
+| Region name | `entity.name.section.region.scl` |
 | Data types | `support.type.primitive.scl` |
 | Time / date literals | `constant.other.literal.scl` |
 | Numbers | `constant.numeric.scl` |
 | Instruction calls | `entity.name.function.scl` |
 | Attribute lists `{ … }` | `meta.attribute.scl` |
 
+Earlier theme experiments (a flat petrol light/dark pair and separate Classic Project/Portal views) are kept in [`archive/`](archive/).
+
 ## Releasing a new version
 
 1. Bump `version` in `package.json` and add a note to `CHANGELOG.md`.
-2. Tag and push: `git tag v1.1.0 && git push origin v1.1.0`.
-3. The GitHub Actions workflow builds the `.vsix` and attaches it to a new release automatically.
+2. Create a GitHub release with a new tag such as `v2.1.0` (or push the tag).
+3. The GitHub Actions workflow builds the `.vsix` and attaches it to the release automatically.
 
 ## Contributing
 
-Issues and pull requests are welcome — especially color corrections from people with TIA Portal open side by side, and SCL grammar cases that highlight wrong. Please include a short SCL snippet that shows the problem.
+Issues and pull requests are welcome, especially color corrections from people with TIA Portal open side by side, and SCL grammar cases that highlight wrong. Please include a short SCL snippet that shows the problem.
 
 ## Disclaimer
 
-This is an unofficial community project. It is not affiliated with, endorsed by, or sponsored by Siemens AG. SIEMENS, SIMATIC and TIA Portal are trademarks of Siemens AG and are used here only to describe what the theme is inspired by. No Siemens logos or assets are included.
+This is an unofficial community project. It is not affiliated with, endorsed by, or sponsored by Siemens AG. SIEMENS, SIMATIC and TIA Portal are trademarks of Siemens AG and are used here only to describe what the theme is inspired by. No Siemens logos or artwork are included; the gear watermark is an original drawing.
 
 ## License
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0
+
+- One theme: **TIA Portal**. It follows TIA's Project View with the Portal View's navy navigation column, slate buttons and orange active marker mixed in.
+- Gear watermark appears only when no editor is open, with no extra text, as in TIA Portal. Removed the gears from the side bar.
+- CSS layer renamed to `css/tia-portal.css`; generator is now `scripts/gen_theme.py`.
+- Previous themes moved to `archive/` and no longer ship in the extension.
+- Release workflow now runs when a GitHub release is published.
+
 ## 1.1.0
 
 - New **TIA Portal Classic – Project View** and **TIA Portal Classic – Portal View** themes, pixel-matched to TIA Portal V16/V19.

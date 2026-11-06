@@ -5,3 +5,4 @@ scripts/**
 *.vsix
 node_modules/**
 images/preview-*
+archive/**
