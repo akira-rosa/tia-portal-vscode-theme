@@ -84,8 +84,20 @@
       ]
     },
     "regions": {
-      "name": "keyword.control.region.scl",
-      "match": "(?i)\\b(?:END_REGION|REGION)\\b"
+      "patterns": [
+        {
+          "comment": "REGION <name> - the name is colored like the keyword in TIA",
+          "match": "(?i)\\b(REGION)\\b([^\\n/]*)",
+          "captures": {
+            "1": { "name": "keyword.control.region.scl" },
+            "2": { "name": "entity.name.section.region.scl" }
+          }
+        },
+        {
+          "name": "keyword.control.region.scl",
+          "match": "(?i)\\bEND_REGION\\b"
+        }
+      ]
     },
     "blockKeywords": {
       "name": "keyword.other.block.scl",
