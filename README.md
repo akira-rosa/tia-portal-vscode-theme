@@ -1,6 +1,10 @@
 # TIA Portal Theme for VS Code
 
-A VS Code theme that mimics the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code exactly the way the TIA SCL editor does.
+VS Code themes inspired by the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code exactly the way the TIA SCL editor does. Three themes are included:
+
+- **TIA Portal**: the stylized one, a close replica of TIA Portal's look.
+- **TIA Portal – Portal View**: a calmer, flat light theme with Siemens petrol accents.
+- **TIA Portal – Project View**: the same calmer style in dark petrol.
 
 ![TIA Portal theme with two SCL blocks open](images/preview-editors.png)
 
@@ -8,7 +12,7 @@ A VS Code theme that mimics the Siemens **TIA Portal** engineering software, plu
 |---|---|
 | ![Empty work area with gears](images/preview-empty.png) | ![Dialog in the TIA frame](images/preview-dialog.png) |
 
-## The look
+## TIA Portal (stylized)
 
 It follows TIA Portal's **Project View**, with the **Portal View's** navigation column mixed in. Colors were pixel-sampled from TIA Portal V16/V19:
 
@@ -24,14 +28,32 @@ It follows TIA Portal's **Project View**, with the **Portal View's** navigation 
 - **Classic always-visible scrollbars**, gradient push buttons and yellow tooltips.
 - **SCL colors exactly like TIA**: keywords and data types blue `#0000FF`, whole `REGION …` lines magenta, comments green, and operands, numbers and literals plain black.
 
+## TIA Portal – Portal View and Project View
+
+Two calmer, flat themes for everyday use. They need no extra setup: no CSS layer, just pick them.
+
+| TIA Portal – Portal View (light) | TIA Portal – Project View (dark) |
+|---|---|
+| ![Portal View](images/preview-portal-view-light.png) | ![Project View](images/preview-project-view-dark.png) |
+
+- **Portal View** is a light gray-and-white workspace with Siemens petrol (`#009999`) accents and selection.
+- **Project View** is the dark petrol version for long sessions or dark rooms.
+- Both turn the status bar online-orange while debugging.
+- SCL code uses a slightly richer palette than TIA's editor: `#local` tags in petrol, literals in orange and strings in red, on top of TIA's blue keywords and green comments.
+
 ## Install
+
+**From the Extensions view:** search for **TIA Portal Theme** and click **Install**.
+
+**From a release file:**
 
 1. Download the latest `tia-portal-vscode-theme-x.y.z.vsix` from the [Releases page](https://github.com/akira-rosa/tia-portal-vscode-theme/releases).
 2. In VS Code open the Extensions view, click the `…` menu → **Install from VSIX…**, and pick the file.
-   Or from a terminal: `code --install-extension tia-portal-vscode-theme-2.0.0.vsix`
-3. Press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and choose **TIA Portal**.
+   Or from a terminal: `code --install-extension tia-portal-vscode-theme-2.1.0.vsix`
 
-That gives you all the colors. For the gradients, glossy strips, bevels, dialog frames and gears, add the CSS layer below.
+Then press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and choose **TIA Portal**, **TIA Portal – Portal View** or **TIA Portal – Project View**.
+
+That gives you all the colors. For the stylized TIA Portal theme's gradients, glossy strips, bevels, dialog frames and gears, add the CSS layer below.
 
 ## Turning on the gradients and borders (CSS layer)
 
@@ -53,7 +75,7 @@ Things to know:
 - VS Code will say your installation "appears to be corrupt". That's expected when CSS is injected; choose **Don't Show Again**.
 - After every VS Code update, run **Reload Custom CSS and JS** again.
 - On Windows with a system-wide install you may need to run VS Code as administrator once for step 4.
-- Every rule is scoped to the TIA Portal theme, so switching to another theme turns the CSS off.
+- Every rule is scoped to the stylized TIA Portal theme, so switching to Portal View, Project View or any other theme turns the CSS off.
 - To remove it, run **Disable Custom CSS and JS** and restart.
 
 For the full TIA feel, these settings help:
@@ -84,10 +106,11 @@ Data block sources use the `.db` extension, which VS Code won't claim automatica
 
 ## Customizing
 
-The theme and its CSS are generated from one palette at the top of [`scripts/gen_theme.py`](scripts/gen_theme.py). Change a value and regenerate:
+The stylized theme and its CSS come from [`scripts/gen_theme.py`](scripts/gen_theme.py); Portal View and Project View come from [`scripts/gen_themes.py`](scripts/gen_themes.py). Change a palette value and regenerate:
 
 ```bash
-python3 scripts/gen_theme.py      # rewrites themes/tia-portal-color-theme.json and css/tia-portal.css
+python3 scripts/gen_theme.py      # TIA Portal theme + css/tia-portal.css
+python3 scripts/gen_themes.py     # Portal View + Project View
 ```
 
 For a quick personal tweak without rebuilding, override colors in your `settings.json`:
@@ -119,13 +142,13 @@ For a quick personal tweak without rebuilding, override colors in your `settings
 | Instruction calls | `entity.name.function.scl` |
 | Attribute lists `{ … }` | `meta.attribute.scl` |
 
-Earlier theme experiments (a flat petrol light/dark pair and separate Classic Project/Portal views) are kept in [`archive/`](archive/).
+Earlier experiments (separate Classic Project/Portal views) are kept in [`archive/`](archive/).
 
 ## Releasing a new version
 
 1. Bump `version` in `package.json` and add a note to `CHANGELOG.md`.
-2. Create a GitHub release with a new tag such as `v2.1.0` (or push the tag).
-3. The GitHub Actions workflow builds the `.vsix` and attaches it to the release automatically.
+2. Publish a GitHub release with a matching tag, such as `v2.2.0`.
+3. The GitHub Actions workflow builds the `.vsix`, attaches it to the release, and publishes it to the VS Code Marketplace and Open VSX when the `VSCE_PAT` / `OVSX_PAT` repository secrets are set.
 
 ## Contributing
 

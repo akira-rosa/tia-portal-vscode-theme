@@ -1,8 +1,8 @@
 {
   "name": "tia-portal-vscode-theme",
   "displayName": "TIA Portal Theme",
-  "description": "A VS Code theme that mimics Siemens TIA Portal, with SCL syntax highlighting.",
-  "version": "2.0.0",
+  "description": "Siemens TIA Portal-inspired themes for VS Code: a stylized TIA Portal theme plus light Portal View and dark Project View variants, with SCL syntax highlighting.",
+  "version": "2.1.0",
   "publisher": "akira-rosa",
   "author": "akira-rosa",
   "license": "MIT",
@@ -41,6 +41,16 @@
         "label": "TIA Portal",
         "uiTheme": "vs",
         "path": "./themes/tia-portal-color-theme.json"
+      },
+      {
+        "label": "TIA Portal – Portal View",
+        "uiTheme": "vs",
+        "path": "./themes/tia-portal-portal-view-color-theme.json"
+      },
+      {
+        "label": "TIA Portal – Project View",
+        "uiTheme": "vs-dark",
+        "path": "./themes/tia-portal-project-view-color-theme.json"
       }
     ],
     "languages": [

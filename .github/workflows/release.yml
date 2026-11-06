@@ -1,5 +1,7 @@
 name: Release
 
+# Runs when a GitHub release is published, or manually from the Actions tab
+# (pick the release tag in "Use workflow from" to re-publish an existing version).
 on:
   release:
     types: [published]
@@ -11,6 +13,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Add these in Settings -> Secrets and variables -> Actions.
+      # Each publish step is skipped while its secret is missing.
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}   # VS Code Marketplace (Azure DevOps token)
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}   # Open VSX (VSCodium, Cursor, ...)
     steps:
       - uses: actions/checkout@v4
 
@@ -19,17 +26,27 @@ jobs:
           node-version: 20
 
       - name: Package extension
-        run: npx --yes @vscode/vsce package --out tia-portal-vscode-theme-${GITHUB_REF_NAME#v}.vsix
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VSIX=tia-portal-vscode-theme-$VERSION.vsix" >> "$GITHUB_ENV"
+          npx --yes @vscode/vsce package --out "tia-portal-vscode-theme-$VERSION.vsix"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: vsix
-          path: "*.vsix"
+          path: ${{ env.VSIX }}
 
-      - name: Publish GitHub release
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Attach to GitHub release
+        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: "*.vsix"
-          generate_release_notes: true
+          files: ${{ env.VSIX }}
+
+      - name: Publish to VS Code Marketplace
+        if: env.VSCE_PAT != '' && startsWith(github.ref, 'refs/tags/v')
+        run: npx --yes @vscode/vsce publish --packagePath "$VSIX" --pat "$VSCE_PAT"
+
+      - name: Publish to Open VSX
+        if: env.OVSX_PAT != '' && startsWith(github.ref, 'refs/tags/v')
+        run: npx --yes ovsx publish "$VSIX" --pat "$OVSX_PAT"

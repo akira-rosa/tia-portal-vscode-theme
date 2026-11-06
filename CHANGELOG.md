@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+
+- Three themes in one extension: the stylized **TIA Portal** theme plus the calmer **TIA Portal – Portal View** (light) and **TIA Portal – Project View** (dark).
+- Release workflow can publish to the VS Code Marketplace and Open VSX when their tokens are set as repository secrets.
+
 ## 2.0.0
 
 - One theme: **TIA Portal**. It follows TIA's Project View with the Portal View's navy navigation column, slate buttons and orange active marker mixed in.
