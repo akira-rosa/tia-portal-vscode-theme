@@ -3,8 +3,8 @@
 VS Code themes inspired by the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code exactly the way the TIA SCL editor does. Three themes are included:
 
 - **TIA Portal**: the stylized one, a close replica of TIA Portal's look.
-- **TIA Portal – Portal View**: a calmer, flat light theme with Siemens petrol accents.
-- **TIA Portal – Project View**: the same calmer style in dark petrol.
+- **TIA Portal - White**: a calmer, flat light theme with Siemens petrol accents.
+- **TIA Portal - Dark**: the same calmer style in dark petrol.
 
 ![TIA Portal theme with two SCL blocks open](images/preview-editors.png)
 
@@ -28,16 +28,16 @@ It follows TIA Portal's **Project View**, with the **Portal View's** navigation 
 - **Classic always-visible scrollbars**, gradient push buttons and yellow tooltips.
 - **SCL colors exactly like TIA**: keywords and data types blue `#0000FF`, whole `REGION …` lines magenta, comments green, and operands, numbers and literals plain black.
 
-## TIA Portal – Portal View and Project View
+## TIA Portal - Simple
 
 Two calmer, flat themes for everyday use. They need no extra setup: no CSS layer, just pick them.
 
-| TIA Portal – Portal View (light) | TIA Portal – Project View (dark) |
+| TIA Portal - light | TIA Portal - dark |
 |---|---|
 | ![Portal View](images/preview-portal-view-light.png) | ![Project View](images/preview-project-view-dark.png) |
 
-- **Portal View** is a light gray-and-white workspace with Siemens petrol (`#009999`) accents and selection.
-- **Project View** is the dark petrol version for long sessions or dark rooms.
+- **TIA Portal light** is a light gray-and-white workspace with Siemens petrol (`#009999`) accents and selection.
+- **TIA Portal dark** is the dark petrol version for long sessions or dark rooms.
 - Both turn the status bar online-orange while debugging.
 - SCL code uses a slightly richer palette than TIA's editor: `#local` tags in petrol, literals in orange and strings in red, on top of TIA's blue keywords and green comments.
 
