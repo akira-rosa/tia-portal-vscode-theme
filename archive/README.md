@@ -1,11 +1,11 @@
 # Archive
 
-Earlier theme experiments (the separate Classic Project/Portal views), kept for reference. They are not part of the extension.
+Earlier theme experiments (the Classic Gray and Navy variants), kept for reference. They are not part of the extension.
 
 | File | What it was |
 |---|---|
-| `themes/tia-portal-classic-project-view-color-theme.json` | v1.1 Classic Project View |
-| `themes/tia-portal-classic-portal-view-color-theme.json` | v1.1 Classic Portal View (navy/slate) |
+| `themes/tia-portal-classic-gray-color-theme.json` | v1.1 TIA Portal Classic - Gray |
+| `themes/tia-portal-classic-navy-color-theme.json` | v1.1 TIA Portal Classic - Navy (navy/slate) |
 | `css/tia-portal-classic.css` | v1.1 CSS layer for the two Classic themes |
 | `scripts/gen_classic.py` | the generator that produced them |
 

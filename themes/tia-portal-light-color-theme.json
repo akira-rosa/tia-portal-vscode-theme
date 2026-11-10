@@ -1,6 +1,6 @@
 {
   "$schema": "vscode://schemas/color-theme",
-  "name": "TIA Portal – Portal View",
+  "name": "TIA Portal - Light",
   "type": "light",
   "semanticHighlighting": true,
   "colors": {

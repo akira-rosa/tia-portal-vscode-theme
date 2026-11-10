@@ -8,7 +8,7 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path
 # Palettes
 # ---------------------------------------------------------------------------
 LIGHT = dict(
-    name="TIA Portal – Portal View", type="light",
+    name="TIA Portal - Light", type="light",
     # chrome
     frame="#E6E6E6",        # window frame / title bar
     chrome="#F0F0F0",       # menus, toolbars, inactive tabs
@@ -34,7 +34,7 @@ LIGHT = dict(
 )
 
 DARK = dict(
-    name="TIA Portal – Project View", type="dark",
+    name="TIA Portal - Dark", type="dark",
     frame="#14232A",
     chrome="#1A2B33",
     header="#22363F",
@@ -316,8 +316,8 @@ def semantic(p):
     }
 
 
-for pal, fname in [(LIGHT, "tia-portal-portal-view-color-theme.json"),
-                   (DARK, "tia-portal-project-view-color-theme.json")]:
+for pal, fname in [(LIGHT, "tia-portal-light-color-theme.json"),
+                   (DARK, "tia-portal-dark-color-theme.json")]:
     theme = {
         "$schema": "vscode://schemas/color-theme",
         "name": pal["name"],

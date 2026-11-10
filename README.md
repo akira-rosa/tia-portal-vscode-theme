@@ -3,7 +3,7 @@
 VS Code themes inspired by the Siemens **TIA Portal** engineering software, plus SCL syntax highlighting that colors your code exactly the way the TIA SCL editor does. Three themes are included:
 
 - **TIA Portal**: the stylized one, a close replica of TIA Portal's look.
-- **TIA Portal - White**: a calmer, flat light theme with Siemens petrol accents.
+- **TIA Portal - Light**: a calmer, flat light theme with Siemens petrol accents.
 - **TIA Portal - Dark**: the same calmer style in dark petrol.
 
 ![TIA Portal theme with two SCL blocks open](images/preview-editors.png)
@@ -32,12 +32,12 @@ It follows TIA Portal's **Project View**, with the **Portal View's** navigation 
 
 Two calmer, flat themes for everyday use. They need no extra setup: no CSS layer, just pick them.
 
-| TIA Portal - light | TIA Portal - dark |
+| TIA Portal - Light | TIA Portal - Dark |
 |---|---|
-| ![Portal View](images/preview-portal-view-light.png) | ![Project View](images/preview-project-view-dark.png) |
+| ![TIA Portal - Light](images/preview-light.png) | ![TIA Portal - Dark](images/preview-dark.png) |
 
-- **TIA Portal light** is a light gray-and-white workspace with Siemens petrol (`#009999`) accents and selection.
-- **TIA Portal dark** is the dark petrol version for long sessions or dark rooms.
+- **TIA Portal - Light** is a light gray-and-white workspace with Siemens petrol (`#009999`) accents and selection.
+- **TIA Portal - Dark** is the dark petrol version for long sessions or dark rooms.
 - Both turn the status bar online-orange while debugging.
 - SCL code uses a slightly richer palette than TIA's editor: `#local` tags in petrol, literals in orange and strings in red, on top of TIA's blue keywords and green comments.
 
@@ -51,7 +51,7 @@ Two calmer, flat themes for everyday use. They need no extra setup: no CSS layer
 2. In VS Code open the Extensions view, click the `…` menu → **Install from VSIX…**, and pick the file.
    Or from a terminal: `code --install-extension tia-portal-vscode-theme-2.1.0.vsix`
 
-Then press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and choose **TIA Portal**, **TIA Portal – Portal View** or **TIA Portal – Project View**.
+Then press `Ctrl+K Ctrl+T` (macOS: `Cmd+K Cmd+T`) and choose **TIA Portal**, **TIA Portal - Light** or **TIA Portal - Dark**.
 
 That gives you all the colors. For the stylized TIA Portal theme's gradients, glossy strips, bevels, dialog frames and gears, add the CSS layer below.
 
@@ -75,7 +75,7 @@ Things to know:
 - VS Code will say your installation "appears to be corrupt". That's expected when CSS is injected; choose **Don't Show Again**.
 - After every VS Code update, run **Reload Custom CSS and JS** again.
 - On Windows with a system-wide install you may need to run VS Code as administrator once for step 4.
-- Every rule is scoped to the stylized TIA Portal theme, so switching to Portal View, Project View or any other theme turns the CSS off.
+- Every rule is scoped to the stylized TIA Portal theme, so switching to TIA Portal - Light, TIA Portal - Dark or any other theme turns the CSS off.
 - To remove it, run **Disable Custom CSS and JS** and restart.
 
 For the full TIA feel, these settings help:
@@ -106,11 +106,11 @@ Data block sources use the `.db` extension, which VS Code won't claim automatica
 
 ## Customizing
 
-The stylized theme and its CSS come from [`scripts/gen_theme.py`](scripts/gen_theme.py); Portal View and Project View come from [`scripts/gen_themes.py`](scripts/gen_themes.py). Change a palette value and regenerate:
+The stylized theme and its CSS come from [`scripts/gen_theme.py`](scripts/gen_theme.py); TIA Portal - Light and TIA Portal - Dark come from [`scripts/gen_themes.py`](scripts/gen_themes.py). Change a palette value and regenerate:
 
 ```bash
 python3 scripts/gen_theme.py      # TIA Portal theme + css/tia-portal.css
-python3 scripts/gen_themes.py     # Portal View + Project View
+python3 scripts/gen_themes.py     # TIA Portal - Light + TIA Portal - Dark
 ```
 
 For a quick personal tweak without rebuilding, override colors in your `settings.json`:
@@ -142,7 +142,7 @@ For a quick personal tweak without rebuilding, override colors in your `settings
 | Instruction calls | `entity.name.function.scl` |
 | Attribute lists `{ … }` | `meta.attribute.scl` |
 
-Earlier experiments (separate Classic Project/Portal views) are kept in [`archive/`](archive/).
+Earlier experiments (the Classic Gray and Navy variants) are kept in [`archive/`](archive/).
 
 ## Releasing a new version
 

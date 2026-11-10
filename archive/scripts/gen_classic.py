@@ -2,8 +2,8 @@
 """Generate the stylized "TIA Portal Classic" themes and their CSS layer.
 
 Outputs
-  themes/tia-portal-classic-project-view-color-theme.json
-  themes/tia-portal-classic-portal-view-color-theme.json
+  themes/tia-portal-classic-gray-color-theme.json
+  themes/tia-portal-classic-navy-color-theme.json
   css/tia-portal-classic.css     (gradients, bevels, glossy title strips,
                                   gear watermark - needs a custom-CSS loader)
 
@@ -216,7 +216,7 @@ def common_widgets():
     }
 
 
-def project_view():
+def classic_gray():
     c = {}
     c.update(common_widgets())
     c.update(common_editor())
@@ -329,7 +329,7 @@ def project_view():
     return c
 
 
-def portal_view():
+def classic_navy():
     c = {}
     c.update(common_widgets())
     c.update(common_editor())
@@ -494,8 +494,8 @@ def data_uri(svg):
 def css():
     gears_project = data_uri(gears_svg("#2B334B", "#7C8BB5"))
     gears_portal = data_uri(gears_svg("#2E3650", "#8495BF"))
-    PV = '[class*="tia-portal-classic-project-view"]'
-    PO = '[class*="tia-portal-classic-portal-view"]'
+    PV = '[class*="tia-portal-classic-gray"]'
+    PO = '[class*="tia-portal-classic-navy"]'
     ANY = '[class*="tia-portal-classic-"]'
     return f"""/*
  * TIA Portal Classic - stylized layer for VS Code
@@ -911,10 +911,10 @@ def write(theme_name, colors, fname):
 
 
 if __name__ == "__main__":
-    write("TIA Portal Classic – Project View", project_view(),
-          "tia-portal-classic-project-view-color-theme.json")
-    write("TIA Portal Classic – Portal View", portal_view(),
-          "tia-portal-classic-portal-view-color-theme.json")
+    write("TIA Portal Classic - Gray", classic_gray(),
+          "tia-portal-classic-gray-color-theme.json")
+    write("TIA Portal Classic - Navy", classic_navy(),
+          "tia-portal-classic-navy-color-theme.json")
     os.makedirs(os.path.join(ROOT, "css"), exist_ok=True)
     with open(os.path.join(ROOT, "css", "tia-portal-classic.css"), "w", encoding="utf-8") as f:
         f.write(css())
